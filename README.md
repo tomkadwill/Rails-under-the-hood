@@ -2,4 +2,4 @@
 
 ### Contents
 1. [Introduction](introduction.md)
-2. [Request/Response Flow](request-response-flow.md)
+2. [Request/Response Flow](request-response-flow/request-response-flow.md)

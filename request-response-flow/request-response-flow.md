@@ -1,6 +1,6 @@
 #Request/Response Flow
 
-### What happens when we make a *request?
+### What happens when we make a [request](request-response-flow/request.md)?
 - type `www.example.com/courses` into the browser
 - This initiates a GET request to `/courses` to our applications **webserver.
 - Next, we follow the request from the webserver to the ***app server
@@ -27,13 +27,6 @@ end
 - The courses model pulls the results out of the database
 - Next the controller can render a view. It looks for a view based on a naming convention. In this example it would look for a view template called `app/view/courses/index.html.erb`
 - The view templates defines HTML to return in the ******HTTP response body
-
-### *What is a request?
-- A set of instructions that tells the client what they want
-- Request path tells it what resource to look for
-- HTTP VERB tells the client what action to perform on the resource
-- Query data. This allows us to params to the server
-- Header data. Has information that may be useful to the client (eg. users browser, HTTP version etc)
 
 ### **What is a webserver?
 - A webserver delivers webpages on the request of clients using HTTP
