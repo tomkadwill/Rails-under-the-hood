@@ -19,6 +19,15 @@ Otherwise, the web server will pass the request on to the app server (Unicorn, T
 
 5) What about Rack? Unicorn, Thin and Puma are all different webservers but they can all run Rails (and other Ruby applications). All of these webservers adhere to the Rack protocal.
 
+The interface for a Rack application is a Ruby object that responds to the `call` method, taking the environment hash as a parameter, and returning an Array with three elements.
+
+Here is an example Rack application:
+
+```ruby
+# config.ru
+run Proc.new { |env| ['200', {'Content-Type' => 'text/html'}, ['get rack\'d']] }
+```
+
 6) Once the web server has handed the request on to the app server, this is the entry point into Rails. The app server will direct the request to the router. This tells Rails where to route this request in the application. A routes file looks like:
 
 ```ruby
