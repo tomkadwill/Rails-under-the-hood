@@ -15,16 +15,18 @@ Host: www.example.com
 
 4) Next, the request will hit the web server (Nginx and Apache are two of the most common web servers). A web server will handle the incoming HTTP request and pass it on to the app server if required. For example, if the request is for something that doesn't change often (CSS, JavaScript or images) then this can be handled by the web server alone, it doesn't need to involve the app server.
 
-Otherwise, the web server will pass the request on to the app server.
+Otherwise, the web server will pass the request on to the app server (Unicorn, Thin and Puma are examples of app servers). The app server is responsible for actually running the rails application, it loads your application code and keeps it in memory. When the app server gets a request from your web server, it tells your Rails app about it (you can run an app server without a web server but in production you'd usually want to use a web server).
 
-4) This is the entry point into Rails. The app server will direct the request to the router. This tells Rails where to route this request in the application. A routes file looks like:
+5) What about Rack? Unicorn, Thin and Puma are all different webservers but they can all run Rails (and other Ruby applications). All of these webservers adhere to the Rack protocal.
+
+6) Once the web server has handed the request on to the app server, this is the entry point into Rails. The app server will direct the request to the router. This tells Rails where to route this request in the application. A routes file looks like:
 
 ```ruby
 resources :courses, only: [:index, :show] do
 end
 ```
 
-5) After hitting the router, the request will move to the controller. The example of `www.example.com/courses` is going to correspond to the `courses` [controller](controller.md), `index` action. The index action contains code for rendering a collection of records. Here is an example:
+7) After hitting the router, the request will move to the controller. The example of `www.example.com/courses` is going to correspond to the `courses` [controller](controller.md), `index` action. The index action contains code for rendering a collection of records. Here is an example:
 
 ```ruby
 class CoursesController < ApplicationController
@@ -34,13 +36,13 @@ class CoursesController < ApplicationController
 end
 ```
 
-6) The first line of the `index` action calls the `Course` [model](model.md).
+8) The first line of the `index` action calls the `Course` [model](model.md).
 
-7) The courses model pulls the results out of the database.
+9) The courses model pulls the results out of the database.
 
-8) Next the controller renders the view. It looks for a view based on a naming convention. In this example it would look for a view template called `app/view/courses/index.html.erb`.
+10) Next the controller renders the view. It looks for a view based on a naming convention. In this example it would look for a view template called `app/view/courses/index.html.erb`.
 
-9) The view templates defines HTML to return in the [HTTP response body](http-body.md).
+11) The view templates defines HTML to return in the [HTTP response body](http-body.md).
 
 ## References
 1. Rails Conf 2013 - How a Request Becomes a Response: https://www.youtube.com/watch?v=Cj2VDSugHM8
